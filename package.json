@@ -1,0 +1,113 @@
+{
+  "name": "scribe-hexmap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build/index.js",
+  "scripts": {
+    "build": "npm run clean:build && npm run clean:dist && npm run lint && npm run test && npm run webpack && babel src -d build",
+    "clean:build": "rimraf build",
+    "clean:coverage": "rimraf coverage",
+    "clean:dist": "rimraf dist",
+    "clean:node_modules": "rimraf node_modules",
+    "clean": "npm run clean:build && npm run clean:coverage && npm run clean:dist && npm run clean:node_modules",
+    "reinstall": "npm run clean && yarn",
+    "lint:eslint": "eslint .",
+    "lint": "npm run lint:eslint",
+    "prepublish": "npm run build",
+    "start": "open src/index.html",
+    "test:watch": "jest --watch --coverage",
+    "test": "npm run lint && jest --coverage",
+    "webpack": "./node_modules/.bin/webpack --config webpack.config.js"
+  },
+  "author": "luetkemj",
+  "license": {
+    "type": "MIT",
+    "url": "https://github.com/luetkemj/storybook-playground/raw/master/LICENSE"
+  },
+  "jest": {
+    "verbose": true
+  },
+  "dependencies": {
+    "honeycomb-grid": "^0.6.1",
+    "pixi.js": "^4.5.2"
+  },
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-eslint": "7.2.3",
+    "babel-loader": "7.0.0",
+    "babel-plugin-transform-strict-mode": "6.24.1",
+    "babel-preset-env": "1.5.1",
+    "css-loader": "0.28.4",
+    "cz-conventional-changelog": "2.0.0",
+    "cz-emoji": "0.1.0",
+    "eslint": "3.19.0",
+    "eslint-config-airbnb": "15.0.1",
+    "eslint-config-airbnb-base": "11.2.0",
+    "eslint-plugin-import": "2.3.0",
+    "eslint-plugin-jsx-a11y": "5.0.3",
+    "eslint-plugin-react": "7.0.1",
+    "jest": "20.0.4",
+    "node-sass": "4.5.3",
+    "rimraf": "2.6.1",
+    "sass-loader": "6.0.5",
+    "style-loader": "0.18.1",
+    "webpack": "2.6.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-emoji"
+    },
+    "cz-emoji": {
+      "types": [
+        {
+          "name": "build \t🤖  Changes that affect the build system or external dependencies",
+          "value": "U+1F916"
+        },
+        {
+          "name": "chore \t🔨  A chore change",
+          "value": ":hammer:"
+        },
+        {
+          "name": "ci \t\t👷  Changes to our CI configuration files and scripts",
+          "value": ":construction_worker:"
+        },
+        {
+          "name": "docs \t\t📖  Documentation change",
+          "value": ":book:"
+        },
+        {
+          "name": "feature \t🌟  A new feature",
+          "value": ":star2:"
+        },
+        {
+          "name": "fix \t\t🐞  A bug fix",
+          "value": ":beetle:"
+        },
+        {
+          "name": "init \t\t✨  Initalize project",
+          "value": ":sparkles:"
+        },
+        {
+          "name": "perf \t\t⏱️  A code change that improves performance",
+          "value": "U+23F1"
+        },
+        {
+          "name": "refactor \t🎨  A code refactoring change",
+          "value": ":art:"
+        },
+        {
+          "name": "revert \t😱  Reverts a previous commit",
+          "value": ":scream:"
+        },
+        {
+          "name": "style \t💅  Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
+          "value": ":nail_care:"
+        },
+        {
+          "name": "test \t\t🔬  Adding missing tests or correcting existing tests",
+          "value": ":microscope:"
+        }
+      ]
+    }
+  }
+}
