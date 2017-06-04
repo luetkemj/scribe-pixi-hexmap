@@ -1,4 +1,6 @@
-const app = new PIXI.Application(800, 600, { antialias: true, resolution: 1 });
+import { Grid, HEX_ORIENTATIONS } from 'honeycomb-grid';
+
+const app = new PIXI.Application(1000, 1000, { antialias: true, resolution: 1 });
 
 document.getElementById('map').appendChild(app.view);
 
@@ -28,26 +30,17 @@ function drawHexagon(center, size) {
   app.stage.addChild(graphics);
 }
 
-function hexToPixel(hex) {
-  const x = hex.size * ((3 / 2) * hex.q);
-  const y = hex.size * Math.sqrt(3) * (hex.r + (hex.q / 2));
-  return { x, y };
-}
+const grid = Grid({
+  size: 20,
+  orientation: HEX_ORIENTATIONS.FLAT,
+});
 
-// function pixelToHex(x, y, size) {
-//   const q = x * 2/3 / size;
-//   const r = (-x / 3 + Math.sqrt(3) / 3 * y) / size
-//   return {q, r};
-// }
+const hexArray = grid.rectangle({
+  width: 30,
+  height: 30,
+  direction: 1,
+});
+console.log(hexArray);
+console.log(grid);
 
-const hexArray = [
-  { size: 20, q: 2, r: 1, s: -3 },
-  { size: 20, q: 2, r: 2, s: -4 },
-  { size: 20, q: 3, r: 0, s: -3 },
-  { size: 20, q: 3, r: 1, s: -4 },
-  { size: 20, q: 3, r: 2, s: -5 },
-  { size: 20, q: 4, r: 0, s: -4 },
-  { size: 20, q: 4, r: 1, s: -5 },
-];
-
-hexArray.forEach(hex => drawHexagon(hexToPixel(hex), hex.size));
+hexArray.forEach(hex => drawHexagon(grid.hexToPoint(hex), 20));
