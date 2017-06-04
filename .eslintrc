@@ -1,5 +1,7 @@
 env:
   browser: true
+globals:
+  PIXI: false
 parser: "babel-eslint"
 extends: "airbnb"
 rules:

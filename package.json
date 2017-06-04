@@ -107,6 +107,10 @@
         {
           "name": "test \t\t🔬  Adding missing tests or correcting existing tests",
           "value": ":microscope:"
+        },
+        {
+          "name": "WIP \t\t🚧 work in progress",
+          "value": ":construction:"
         }
       ]
     }
