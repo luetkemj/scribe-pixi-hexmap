@@ -4,7 +4,7 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
-    "build": "npm run clean:build && npm run clean:dist && npm run lint && npm run test && npm run webpack && babel src -d build",
+    "build": "npm run clean:build && npm run clean:dist && npm run lint && npm run test && npm run webpack && npm run babel",
     "clean:build": "rimraf build",
     "clean:coverage": "rimraf coverage",
     "clean:dist": "rimraf dist",
@@ -14,7 +14,8 @@
     "lint:eslint": "eslint .",
     "lint": "npm run lint:eslint",
     "prepublish": "npm run build",
-    "start": "open src/index.html",
+    "babel": "babel src --out-dir build --source-maps inline --copy-files",
+    "babel:watch": "babel --watch src --out-dir build --source-maps inline --copy-files",
     "test:watch": "jest --watch --coverage",
     "test": "npm run lint && jest --coverage",
     "webpack": "./node_modules/.bin/webpack --config webpack.config.js"
