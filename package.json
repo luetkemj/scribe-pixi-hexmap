@@ -4,6 +4,7 @@
   "description": "",
   "main": "build/index.js",
   "scripts": {
+    "babel": "babel src --out-dir build --source-maps inline --copy-files",
     "build": "npm run clean:build && npm run clean:dist && npm run lint && npm run test && npm run webpack && npm run babel",
     "clean:build": "rimraf build",
     "clean:coverage": "rimraf coverage",
@@ -14,11 +15,10 @@
     "lint:eslint": "eslint .",
     "lint": "npm run lint:eslint",
     "prepublish": "npm run build",
-    "babel": "babel src --out-dir build --source-maps inline --copy-files",
-    "babel:watch": "babel --watch src --out-dir build --source-maps inline --copy-files",
+    "start": "node_modules/.bin/webpack-dev-server --config ./webpack.config.dev.js",
     "test:watch": "jest --watch --coverage",
     "test": "npm run lint && jest --coverage",
-    "webpack": "./node_modules/.bin/webpack --config webpack.config.js"
+    "webpack": "./node_modules/.bin/webpack --config webpack.config.prod.js"
   },
   "author": "luetkemj",
   "license": {
@@ -52,7 +52,8 @@
     "rimraf": "2.6.1",
     "sass-loader": "6.0.5",
     "style-loader": "0.18.1",
-    "webpack": "2.6.1"
+    "webpack": "2.6.1",
+    "webpack-dev-server": "2.4.5"
   },
   "config": {
     "commitizen": {

@@ -1,3 +1,4 @@
+const path = require('path');
 const webpack = require('webpack');
 
 module.exports = {
@@ -6,6 +7,7 @@ module.exports = {
       minimize: true,
       sourceMap: true,
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   module: {
     rules: [
@@ -21,8 +23,15 @@ module.exports = {
       },
     ],
   },
+  devtool: 'eval-source-map',
   entry: './src/index.js',
   output: {
     filename: 'dist/scribe-hexmap.min.js',
+  },
+  devServer: {
+    hot: true,
+    port: 3000,
+    contentBase: path.resolve(__dirname, 'build'),
+    publicPath: '/',
   },
 };

@@ -1,6 +1,6 @@
 import { Grid, HEX_ORIENTATIONS } from 'honeycomb-grid';
 
-const app = new PIXI.Application(1000, 1000, { antialias: true, resolution: 1 });
+const app = new PIXI.Application(800, 600, { antialias: true, resolution: 1 });
 
 document.getElementById('map').appendChild(app.view);
 
@@ -36,11 +36,9 @@ const grid = Grid({
 });
 
 const hexArray = grid.rectangle({
-  width: 30,
-  height: 30,
+  width: 11,
+  height: 11,
   direction: 1,
 });
-console.log(hexArray);
-console.log(grid);
 
 hexArray.forEach(hex => drawHexagon(grid.hexToPoint(hex), 20));
