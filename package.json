@@ -62,8 +62,8 @@
     "cz-emoji": {
       "types": [
         {
-          "name": "build \t🤖  Changes that affect the build system or external dependencies",
-          "value": "U+1F916"
+          "name": "build \t📦  Changes that affect the build system or external dependencies",
+          "value": ":package:"
         },
         {
           "name": "chore \t🔨  A chore change",
@@ -90,8 +90,8 @@
           "value": ":sparkles:"
         },
         {
-          "name": "perf \t\t⏱️  A code change that improves performance",
-          "value": "U+23F1"
+          "name": "perf \t\t⏳  A code change that improves performance",
+          "value": ":hourglass_flowing_sand:"
         },
         {
           "name": "refactor \t🎨  A code refactoring change",
