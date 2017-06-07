@@ -1,34 +1,26 @@
 import { Grid, HEX_ORIENTATIONS } from 'honeycomb-grid';
+import { sample } from 'lodash';
 
-const app = new PIXI.Application(800, 600, { antialias: true, resolution: 1 });
+import HexTile from './HexTile';
 
-document.getElementById('map').appendChild(app.view);
+const app = new PIXI.Application({
+  width: window.outerWidth,
+  height: window.outerHeight,
+  antialias: true,
+});
 
-const graphics = new PIXI.Graphics();
+const mapDom = document.getElementById('map');
+mapDom.appendChild(app.view);
 
-function hexCorner(center, size, i) {
-  const deg = 60 * i;
-  const rad = (Math.PI / 180) * deg;
-
-  return {
-    x: center.x + (size * Math.cos(rad)),
-    y: center.y + (size * Math.sin(rad)),
-  };
-}
-
-function drawHexagon(center, size) {
-  graphics.beginFill(0x333333);
-  graphics.lineStyle(1, 0xFFFFFF, 1);
-
-  let point = hexCorner(center, size, 0);
-  graphics.moveTo(point.x, point.y);
-
-  for (let i = 1; i < 7; i += 1) {
-    point = hexCorner(center, size, i);
-    graphics.lineTo(point.x, point.y);
-  }
-  app.stage.addChild(graphics);
-}
+const textures = {
+  coast: new PIXI.Texture.fromImage('./assets/sprites/hexes/coast.png'),
+  desert: new PIXI.Texture.fromImage('./assets/sprites/hexes/desert.png'),
+  forest: new PIXI.Texture.fromImage('./assets/sprites/hexes/forest.png'),
+  hills: new PIXI.Texture.fromImage('./assets/sprites/hexes/hills.png'),
+  mountains: new PIXI.Texture.fromImage('./assets/sprites/hexes/mountains.png'),
+  plains: new PIXI.Texture.fromImage('./assets/sprites/hexes/plains.png'),
+  swamp: new PIXI.Texture.fromImage('./assets/sprites/hexes/swamp.png'),
+};
 
 const grid = Grid({
   size: 20,
@@ -36,9 +28,36 @@ const grid = Grid({
 });
 
 const hexArray = grid.rectangle({
-  width: 11,
-  height: 11,
+  width: 200,
+  height: 200,
   direction: 1,
 });
 
-hexArray.forEach(hex => drawHexagon(grid.hexToPoint(hex), 20));
+hexArray.forEach((hex) => {
+  const tile = new HexTile(sample(textures), hex);
+  app.stage.addChild(tile);
+});
+
+// now that the stage is set we can do things with it
+const minX = (app.stage.width - window.outerWidth) * -1;
+const minY = (app.stage.height - window.outerHeight) * -1;
+
+function handleMouseWheel(event) {
+  if ((app.stage.x + event.deltaX) < minX) {
+    app.stage.x = minX;
+  } else if ((app.stage.x + event.deltaX) > 0) {
+    app.stage.x = 0;
+  } else {
+    app.stage.x += event.deltaX;
+  }
+
+  if ((app.stage.y + event.deltaY) < minY) {
+    app.stage.y = minY;
+  } else if ((app.stage.y + event.deltaY) > 0) {
+    app.stage.y = 0;
+  } else {
+    app.stage.y += event.deltaY;
+  }
+}
+
+mapDom.addEventListener('mousewheel', handleMouseWheel, false);
