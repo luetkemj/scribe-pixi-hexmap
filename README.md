@@ -1,5 +1,3 @@
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-
 # scribe hex map
 
 ## Getting started
@@ -16,5 +14,3 @@ Navigate to `localhost:3000`
 
 ## Contributing
 Feature requests, issues, and contributions are all welcome.
-
-This repo uses [commitizen](http://commitizen.github.io/cz-cli/).

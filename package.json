@@ -40,8 +40,6 @@
     "babel-plugin-transform-strict-mode": "6.24.1",
     "babel-preset-env": "1.5.1",
     "css-loader": "0.28.4",
-    "cz-conventional-changelog": "2.0.0",
-    "cz-emoji": "0.1.0",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "15.0.1",
     "eslint-config-airbnb-base": "11.2.0",
@@ -55,66 +53,5 @@
     "style-loader": "0.18.1",
     "webpack": "2.6.1",
     "webpack-dev-server": "2.4.5"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-emoji"
-    },
-    "cz-emoji": {
-      "types": [
-        {
-          "name": "build \t📦  Changes that affect the build system or external dependencies",
-          "value": ":package:"
-        },
-        {
-          "name": "chore \t🔨  A chore change",
-          "value": ":hammer:"
-        },
-        {
-          "name": "ci \t\t👷  Changes to our CI configuration files and scripts",
-          "value": ":construction_worker:"
-        },
-        {
-          "name": "docs \t\t📖  Documentation change",
-          "value": ":book:"
-        },
-        {
-          "name": "feature \t🌟  A new feature",
-          "value": ":star2:"
-        },
-        {
-          "name": "fix \t\t🐞  A bug fix",
-          "value": ":beetle:"
-        },
-        {
-          "name": "init \t\t✨  Initalize project",
-          "value": ":sparkles:"
-        },
-        {
-          "name": "perf \t\t⏳  A code change that improves performance",
-          "value": ":hourglass_flowing_sand:"
-        },
-        {
-          "name": "refactor \t🎨  A code refactoring change",
-          "value": ":art:"
-        },
-        {
-          "name": "revert \t😱  Reverts a previous commit",
-          "value": ":scream:"
-        },
-        {
-          "name": "style \t💅  Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)",
-          "value": ":nail_care:"
-        },
-        {
-          "name": "test \t\t🔬  Adding missing tests or correcting existing tests",
-          "value": ":microscope:"
-        },
-        {
-          "name": "WIP \t\t🚧  Work in progress",
-          "value": ":construction:"
-        }
-      ]
-    }
   }
 }
