@@ -1,5 +1,5 @@
 export default class HexTile extends PIXI.Sprite {
-  constructor(texture, hex) {
+  constructor(texture, hex, config) {
     super(texture);
 
     this.hex = hex;
@@ -11,11 +11,18 @@ export default class HexTile extends PIXI.Sprite {
     this.width = hex.width();
     this.height = hex.height();
 
+    if (this.hex.isSeed) {
+      if (config.showSeeds) {
+        this.alpha = 0.6;
+      }
+    }
+
     this.cursor = 'pointer';
     this.interactive = true;
 
     this.on('mouseover', () => this.handleMouseover());
     this.on('mouseout', () => this.handleMouseout());
+    this.on('click', () => this.handleClick());
   }
 
   handleMouseover() {
@@ -24,5 +31,9 @@ export default class HexTile extends PIXI.Sprite {
 
   handleMouseout() {
     this.alpha = 1;
+  }
+
+  handleClick() {
+    console.log(this.hex);
   }
 }
