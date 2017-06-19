@@ -14,7 +14,7 @@ world.forEach((hex) => {
 
 
 // map 2
-const app2 = new PIXI.Application({ antialias: true, width: 2000, height: 2000 });
+const app2 = new PIXI.Application({ antialias: true, width: 1950, height: 1150 });
 
 const mapDom2 = document.getElementById('map2');
 mapDom2.appendChild(app2.view);

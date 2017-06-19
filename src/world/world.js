@@ -11,7 +11,7 @@ const config = {
   },
 
   zoom: {
-    multiplier: 8,
+    multiplier: 2,
     origin: { x: 0, y: 0 },
   },
 };
