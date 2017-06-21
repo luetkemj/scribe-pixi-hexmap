@@ -2,6 +2,24 @@ import { rectangleData, rectangleDataCustomOriginHex } from './data';
 import * as hexMath from '../../src/lib/hexMath';
 
 describe('hexMath Lib', () => {
+  describe('hexWidth', () => {
+    it('should work', () => {
+      expect(hexMath.hexWidth(20)).toBe(40);
+    });
+  });
+
+  describe('hexHeight', () => {
+    it('should work', () => {
+      expect(hexMath.hexHeight(20)).toBe(34.64101615137754);
+    });
+  });
+
+  describe('hexToPixel', () => {
+    it('should work', () => {
+      expect(hexMath.hexToPixel(rectangleData.hexes['3,1,-4'], 20)).toEqual({ x: 90, y: 86.60254037844385 });
+    });
+  });
+
   describe('getThirdCoord', () => {
     it('should work', () => {
       expect(hexMath.getThirdCoord(1, 1)).toBe(-2);
@@ -10,14 +28,20 @@ describe('hexMath Lib', () => {
 
   describe('rectangle', () => {
     it('should work without a custom originHex', () => {
-      expect(hexMath.rectangle({ width: 6, height: 4 })).toEqual(rectangleData);
+      expect(hexMath.rectangle(
+        {
+          gridColumns: 6,
+          gridRows: 4,
+          hexSize: 20,
+        })).toEqual(rectangleData);
     });
 
     it('should work with a custom originHex', () => {
       expect(hexMath.rectangle({
         hex: { x: 3, y: 3, z: -6 },
-        width: 2,
-        height: 2,
+        gridColumns: 2,
+        gridRows: 2,
+        hexSize: 20,
       })).toEqual(rectangleDataCustomOriginHex);
     });
   });
