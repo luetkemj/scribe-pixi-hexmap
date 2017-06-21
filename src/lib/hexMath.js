@@ -1,3 +1,6 @@
+import { random, sample } from 'lodash';
+import { terrains } from '../textures/terrains.textures';
+
 export function hexWidth(size) {
   return size * 2;
 }
@@ -16,9 +19,31 @@ export function getThirdCoord(c1, c2) {
   return (-c1 - c2 === -0) ? 0 : -c1 - c2;
 }
 
-export function rectangle({ hex, gridColumns, gridRows, hexSize }) {
-  const array = [];
-  const object = {};
+// this should probably go into another file maybe for dice or something
+export function isSeed(chanceToBeSeed) {
+  return (random(1, 100) <= chanceToBeSeed) || false;
+}
+
+export function makeTerrainSeed(index) {
+  const terrain = sample(terrains.keys);
+
+  return {
+    terrain,
+    terrainKey: index,
+    isSeed: true,
+    texture: terrains.textures[terrain],
+  };
+}
+
+// create a rectangular hexmap with as much inital data in one pass as possible
+export function rectangle({ hex, gridColumns, gridRows, hexSize, seedChance }) {
+  // array for storing an ordered array of ids to use as a lookup for our hexes object
+  const idMap = [];
+
+  // object containing all hexes keyed by ids stored in order within idMap
+  const hexes = {};
+
+  // the top left hex
   const originHex = hex || { x: 0, y: 0, z: 0 };
   const startHex = originHex;
 
@@ -32,22 +57,29 @@ export function rectangle({ hex, gridColumns, gridRows, hexSize }) {
       const x = startHex.x;
       const y = startHex.y + j;
       const z = getThirdCoord(x, y);
+      const hexId = `${x},${y},${z}`;
+      let seed = {};
 
-      array.push(`${x},${y},${z}`);
-      object[`${x},${y},${z}`] = {
-        id: `${x},${y},${z}`,
+      if (isSeed(seedChance)) {
+        seed = makeTerrainSeed(idMap.length + 1);
+      }
+
+      idMap.push(hexId);
+      hexes[hexId] = {
+        id: hexId,
         x,
         y,
         z,
         width: hexWidth(hexSize),
         height: hexHeight(hexSize),
         point: hexToPixel({ x, y, z }, hexSize),
+        ...seed,
       };
     }
   }
 
   return {
-    idMap: array,
-    hexes: object,
+    idMap,
+    hexes,
   };
 }

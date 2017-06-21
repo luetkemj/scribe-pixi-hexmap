@@ -1,5 +1,14 @@
-import { rectangleData, rectangleDataCustomOriginHex } from './data';
+import { rectangleData } from './data';
 import * as hexMath from '../../src/lib/hexMath';
+
+jest.mock('../../src/textures/terrains.textures', () => ({
+  terrains: {
+    keys: ['terrain'],
+    textures: {
+      terrain: 'texture',
+    },
+  },
+}));
 
 describe('hexMath Lib', () => {
   describe('hexWidth', () => {
@@ -28,21 +37,27 @@ describe('hexMath Lib', () => {
 
   describe('rectangle', () => {
     it('should work without a custom originHex', () => {
-      expect(hexMath.rectangle(
-        {
-          gridColumns: 6,
-          gridRows: 4,
-          hexSize: 20,
-        })).toEqual(rectangleData);
+      const data = hexMath.rectangle({
+        gridColumns: 6,
+        gridRows: 4,
+        hexSize: 20,
+        seedChance: 50,
+      });
+
+      expect(data.idMap.length).toBe(24);
+      // console.log(JSON.stringify(data, null, 2));
     });
 
     it('should work with a custom originHex', () => {
-      expect(hexMath.rectangle({
+      const data = hexMath.rectangle({
         hex: { x: 3, y: 3, z: -6 },
         gridColumns: 2,
         gridRows: 2,
         hexSize: 20,
-      })).toEqual(rectangleDataCustomOriginHex);
+        seedChance: 50,
+      });
+
+      expect(data.idMap.length).toBe(4);
     });
   });
 });

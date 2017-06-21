@@ -257,10 +257,6 @@ aws4@^1.2.1:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.6.0.tgz#83ef5ca860b2b32e4a0deedee8c771b9db57471e"
 
-axis.js@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/axis.js/-/axis.js-1.2.1.tgz#092de84493789e1f822aa2eee592c7e3bc4de8fb"
-
 axobject-query@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-0.1.0.tgz#62f59dbc59c9f9242759ca349960e7a2fe3c36c0"
@@ -2371,13 +2367,6 @@ home-or-tmp@^2.0.0:
     os-homedir "^1.0.0"
     os-tmpdir "^1.0.1"
 
-honeycomb-grid@^0.6.1:
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/honeycomb-grid/-/honeycomb-grid-0.6.1.tgz#062ab4a2d574b1f7f01edc9323e46e1e64941fff"
-  dependencies:
-    axis.js "1.2.1"
-    is-dom "1.0.9"
-
 hosted-git-info@^2.1.4:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.4.2.tgz#0076b9f46a270506ddbaaea56496897460612a67"
@@ -2582,10 +2571,6 @@ is-ci@^1.0.10:
 is-date-object@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/is-date-object/-/is-date-object-1.0.1.tgz#9aa20eb6aeebbff77fbd33e74ca01b33581d3a16"
-
-is-dom@1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/is-dom/-/is-dom-1.0.9.tgz#483832d52972073de12b9fe3f60320870da8370d"
 
 is-dotfile@^1.0.0:
   version "1.0.3"
@@ -3837,9 +3822,9 @@ pixi-gl-core@^1.0.3:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/pixi-gl-core/-/pixi-gl-core-1.1.0.tgz#a52cb4dd3254f9c7857a0e9c2356b00e6ec0c761"
 
-pixi.js@^4.5.2:
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/pixi.js/-/pixi.js-4.5.2.tgz#22b63b0c42185ac204e01086aff7ebeb60de0e0c"
+pixi.js@4.5.3:
+  version "4.5.3"
+  resolved "https://registry.yarnpkg.com/pixi.js/-/pixi.js-4.5.3.tgz#16948e55b31fb9e7cd73c7c702670471713d4338"
   dependencies:
     bit-twiddle "^1.0.2"
     earcut "^2.0.7"

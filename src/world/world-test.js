@@ -1,6 +1,5 @@
 import { each, merge } from 'lodash';
 import { rectangle } from '../lib/hexMath';
-// import { Grid, HEX_ORIENTATIONS } from 'honeycomb-grid';
 import { terrains } from '../textures/terrains.textures';
 
 const config = {
@@ -20,11 +19,8 @@ const hexes = rectangle({
   gridColumns: config.map.width,
   gridRows: config.map.height,
   hexSize: 20,
+  seedChance: 100,
 }).hexes;
-
-each(hexes, (hex) => {
-  merge(hex, { texture: terrains.textures.mountains });
-});
 
 // /////////////////////////////////////////
 // MAP 2

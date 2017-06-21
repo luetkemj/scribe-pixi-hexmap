@@ -29,9 +29,8 @@
     "verbose": true
   },
   "dependencies": {
-    "honeycomb-grid": "^0.6.1",
     "lodash": "4.17.4",
-    "pixi.js": "^4.5.2"
+    "pixi.js": "4.5.3"
   },
   "devDependencies": {
     "babel-cli": "6.24.1",

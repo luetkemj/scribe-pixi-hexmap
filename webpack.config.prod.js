@@ -1,11 +1,6 @@
-const webpack = require('webpack');
+// @TODO: add minification
 
 module.exports = {
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-    }),
-  ],
   module: {
     rules: [
       {
@@ -14,7 +9,7 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['env'],
+            presets: ['env', 'stage-3'],
           },
         },
       },
