@@ -1,6 +1,10 @@
 import { random, sample } from 'lodash';
 import { terrains } from '../textures/terrains.textures';
 
+export function distance(hex1, hex2) {
+  return (Math.abs(hex1.x - hex2.x) + Math.abs(hex1.y - hex2.y) + Math.abs(hex1.z - hex2.z)) / 2;
+}
+
 export function hexWidth(size) {
   return size * 2;
 }
@@ -39,6 +43,8 @@ export function makeTerrainSeed(index) {
 export function rectangle({ hex, gridColumns, gridRows, hexSize, seedChance }) {
   // array for storing an ordered array of ids to use as a lookup for our hexes object
   const idMap = [];
+  const idMapSeeds = [];
+  const idMapDirt = [];
 
   // object containing all hexes keyed by ids stored in order within idMap
   const hexes = {};
@@ -62,9 +68,13 @@ export function rectangle({ hex, gridColumns, gridRows, hexSize, seedChance }) {
 
       if (isSeed(seedChance)) {
         seed = makeTerrainSeed(idMap.length + 1);
+        idMapSeeds.push(hexId);
+      } else {
+        idMapDirt.push(hexId);
       }
 
       idMap.push(hexId);
+
       hexes[hexId] = {
         id: hexId,
         x,
@@ -80,6 +90,8 @@ export function rectangle({ hex, gridColumns, gridRows, hexSize, seedChance }) {
 
   return {
     idMap,
+    idMapSeeds,
+    idMapDirt,
     hexes,
   };
 }

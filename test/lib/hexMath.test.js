@@ -11,6 +11,12 @@ jest.mock('../../src/textures/terrains.textures', () => ({
 }));
 
 describe('hexMath Lib', () => {
+  describe('distance', () => {
+    it('should work', () => {
+      expect(hexMath.distance({ x: 0, y: 0, z: 0 }, { x: 10, y: 10, z: -20 })).toBe(20);
+    });
+  });
+
   describe('hexWidth', () => {
     it('should work', () => {
       expect(hexMath.hexWidth(20)).toBe(40);
@@ -38,14 +44,18 @@ describe('hexMath Lib', () => {
   describe('rectangle', () => {
     it('should work without a custom originHex', () => {
       const data = hexMath.rectangle({
-        gridColumns: 6,
-        gridRows: 4,
+        gridColumns: 10,
+        gridRows: 10,
         hexSize: 20,
         seedChance: 50,
       });
 
-      expect(data.idMap.length).toBe(24);
+      console.log(data.idMapDirt.length);
+      console.log(data.idMapSeeds.length);
       // console.log(JSON.stringify(data, null, 2));
+
+      expect(data.idMap.length).toBe(100);
+      expect(data.idMapDirt.length + data.idMapSeeds.length).toBe(data.idMap.length);
     });
 
     it('should work with a custom originHex', () => {
