@@ -15,6 +15,12 @@ export default class Tile extends PIXI.Sprite {
       }
     }
 
+    if (this.hex.isBoundary) {
+      if (config.showBoundaries) {
+        this.alpha = 0.8;
+      }
+    }
+
     this.cursor = 'pointer';
     this.interactive = true;
 

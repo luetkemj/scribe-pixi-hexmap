@@ -1,16 +1,27 @@
 import { rectangleData } from './data';
 import * as hexMath from '../../src/lib/hexMath';
 
-jest.mock('../../src/textures/terrains.textures', () => ({
-  terrains: {
-    keys: ['terrain'],
-    textures: {
-      terrain: 'texture',
-    },
-  },
-}));
-
 describe('hexMath Lib', () => {
+  describe('hexDirection', () => {
+    it('should work', () => {
+      expect(hexMath.hexDirection(3)).toEqual({ x: -1, y: 1, z: 0 });
+    });
+  });
+
+  describe('addHexes', () => {
+    it('should work', () => {
+      expect(hexMath.addHexes({ x: -1, y: 1, z: 0 }, { x: -1, y: 1, z: 0 }))
+        .toEqual({ x: -2, y: 2, z: 0 });
+    });
+  });
+
+  describe('hexNeighbor', () => {
+    it('should work', () => {
+      expect(hexMath.hexNeighbor({ x: 0, y: 0, z: 0 }, 1))
+        .toEqual({ x: 1, y: 0, z: -1 });
+    });
+  });
+
   describe('distance', () => {
     it('should work', () => {
       expect(hexMath.distance({ x: 0, y: 0, z: 0 }, { x: 10, y: 10, z: -20 })).toBe(20);
@@ -41,33 +52,15 @@ describe('hexMath Lib', () => {
     });
   });
 
-  describe('rectangle', () => {
-    it('should work without a custom originHex', () => {
-      const data = hexMath.rectangle({
-        gridColumns: 10,
-        gridRows: 10,
-        hexSize: 20,
-        seedChance: 50,
-      });
-
-      console.log(data.idMapDirt.length);
-      console.log(data.idMapSeeds.length);
-      // console.log(JSON.stringify(data, null, 2));
-
-      expect(data.idMap.length).toBe(100);
-      expect(data.idMapDirt.length + data.idMapSeeds.length).toBe(data.idMap.length);
+  describe('hexToId', () => {
+    it('should work', () => {
+      expect(hexMath.hexToId({ x: 0, y: 0, z: 0 })).toBe('0,0,0');
     });
+  });
 
-    it('should work with a custom originHex', () => {
-      const data = hexMath.rectangle({
-        hex: { x: 3, y: 3, z: -6 },
-        gridColumns: 2,
-        gridRows: 2,
-        hexSize: 20,
-        seedChance: 50,
-      });
-
-      expect(data.idMap.length).toBe(4);
+  describe('idToHex', () => {
+    it('should work', () => {
+      expect(hexMath.idToHex('0,0,0')).toEqual({ x: 0, y: 0, z: 0 });
     });
   });
 });
