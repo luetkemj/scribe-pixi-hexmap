@@ -1,5 +1,5 @@
 import { each } from 'lodash';
-import world from './world/world-test';
+import world from './world/world';
 
 import HexTile from './HexTile';
 
