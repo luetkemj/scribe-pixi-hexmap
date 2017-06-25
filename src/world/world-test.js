@@ -1,10 +1,12 @@
 import * as hexMap from '../lib/hexMap';
+import * as hexMath from '../lib/hexMath';
 
 const config = {
   map: {
-    width: 32,
-    height: 16,
-    seeds: 50,
+    width: 100,
+    height: 100,
+    hexSize: 20,
+    seedChance: 15,
   },
 
   zoom: {
@@ -16,13 +18,17 @@ const config = {
 const data = hexMap.rectangle({
   gridColumns: config.map.width,
   gridRows: config.map.height,
-  hexSize: 20,
-  seedChance: 15,
+  hexSize: config.map.hexSize,
+  seedChance: config.map.seedChance,
 });
 
-// console.log(seedHexes);
 // /////////////////////////////////////////
 // EXPORTS
 // /////////////////////////////////////////
-const world = data.hexes;
+const world = {};
+
+world.data = data.hexes;
+world.width = ((hexMath.hexWidth(config.map.hexSize) * config.map.height) / 2) + 40;
+world.height = hexMath.hexHeight(config.map.hexSize) * config.map.height;
+
 export default world;
