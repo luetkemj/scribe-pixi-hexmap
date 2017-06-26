@@ -1,4 +1,4 @@
-import { each, merge, random, sample } from 'lodash';
+import { each, map, merge, sortBy, random, reverse } from 'lodash';
 import * as hexMath from './hexMath';
 import { terrains } from '../textures/terrains.textures';
 
@@ -6,8 +6,44 @@ export function isSeed(chanceToBeSeed) {
   return (random(1, 100) <= chanceToBeSeed) || false;
 }
 
-export function makeTerrainSeed(index) {
-  const terrain = sample(terrains.keys);
+// TODO
+// Write some tests for this here bit!
+function primeRatios(array) {
+  let ratios = [];
+
+  each(array, (t) => {
+    ratios = ratios.concat(map(t, (value, key) => ({
+      name: key,
+      value,
+    })));
+  });
+
+  ratios = sortBy(ratios, ['value']);
+  reverse(ratios);
+
+  ratios.reduce((acc, ratio, index) => {
+    ratios[index].value = (index > 0) ? ratio.value + ratios[index - 1].value : ratio.value;
+    return ratios[index].value;
+  }, 0);
+
+  return ratios;
+}
+
+
+// TODO test this proper
+export function makeTerrainSeed(index, seedRatios) {
+  const roll = random(0, seedRatios[seedRatios.length - 1].value);
+  let terrain;
+
+  each(seedRatios, (seed) => {
+    if (roll <= seed.value) {
+      terrain = seed.name;
+
+      return false;
+    }
+
+    return true;
+  });
 
   return {
     terrain,
@@ -134,7 +170,7 @@ export function makeOceans(hexes, idMapTerrainKeys, idMapBoundaries) {
 }
 
 // create a rectangular hexmap with as much inital data in one pass as possible
-export function rectangle({ hex, gridColumns, gridRows, hexSize, seedChance }) {
+export function rectangle({ hex, gridColumns, gridRows, hexSize, seedChance, seedChanceRatios }) {
   // array for storing an ordered array of ids to use as a lookup for our hexes object
   const idMap = [];
   const idMapSeeds = [];
@@ -143,6 +179,7 @@ export function rectangle({ hex, gridColumns, gridRows, hexSize, seedChance }) {
 
   // object containing all hexes keyed by ids stored in order within idMap
   const hexes = {};
+  const seedRatios = primeRatios(seedChanceRatios);
 
   // the top left hex
   const originHex = hex || { x: 0, y: 0, z: 0 };
@@ -161,7 +198,7 @@ export function rectangle({ hex, gridColumns, gridRows, hexSize, seedChance }) {
       let seed = {};
 
       if (isSeed(seedChance)) {
-        seed = makeTerrainSeed(idMap.length + 1);
+        seed = makeTerrainSeed(idMap.length + 1, seedRatios);
 
         if (idMapTerrainKeys[seed.terrainKey]) {
           idMapTerrainKeys[seed.terrainKey].push(hexId);
