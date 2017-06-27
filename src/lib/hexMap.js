@@ -165,8 +165,6 @@ export function makeOceans(hexes, idMapTerrainKeys, idMapBoundaries) {
       });
     });
   });
-  // console.log(idMapBoundaries);
-  // console.log(blackList);
 }
 
 // create a rectangular hexmap with as much inital data in one pass as possible

@@ -65,6 +65,8 @@ describe('hexMap Lib', () => {
     });
   });
 
+// @TODO
+// mock the internal functions here - tests are too fragile at the moment
   describe('rectangle', () => {
     it('should work without a custom originHex', () => {
       const data = hexMap.rectangle({
@@ -72,6 +74,9 @@ describe('hexMap Lib', () => {
         gridRows: 10,
         hexSize: 20,
         seedChance: 50,
+        seedChanceRatios: [
+          { water: 0 },
+        ],
       });
 
       // console.log(data.idMapDirt.length);
@@ -91,6 +96,9 @@ describe('hexMap Lib', () => {
         gridRows: 2,
         hexSize: 20,
         seedChance: 50,
+        seedChanceRatios: [
+          { water: 0 },
+        ],
       });
 
       expect(data.idMap.length).toBe(4);
