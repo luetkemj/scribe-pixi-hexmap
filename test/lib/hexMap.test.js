@@ -75,7 +75,7 @@ describe('hexMap Lib', () => {
         hexSize: 20,
         seedChance: 50,
         seedChanceRatios: [
-          { water: 0 },
+          { hills: 0 },
         ],
       });
 
@@ -97,7 +97,7 @@ describe('hexMap Lib', () => {
         hexSize: 20,
         seedChance: 50,
         seedChanceRatios: [
-          { water: 0 },
+          { hills: 0 },
         ],
       });
 
