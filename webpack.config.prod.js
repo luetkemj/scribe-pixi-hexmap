@@ -24,6 +24,7 @@ function makeTemplate(name, obj) {
 module.exports = {
   entry: {
     blobs: `${srcPath}/blobs.js`,
+    'cellular-automata': `${srcPath}/cellular-automata.js`,
   },
 
   output: {
@@ -50,6 +51,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin(makeTemplate('index', { chunks: [] })),
     new HtmlWebpackPlugin(makeTemplate('blobs')),
+    new HtmlWebpackPlugin(makeTemplate('cellular-automata')),
     new HtmlWebpackHarddiskPlugin({
       outputPath: distPath,
     }),

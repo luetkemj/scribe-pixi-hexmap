@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>HexMapper</title>
+    <style>
+      #map {
+        height: 530px;
+        width: 932px;
+        overflow: hidden;
+        margin: 20px;
+        position: relative;
+      }
+
+      #map:after {
+        content: "";
+        height: 530px;
+        width: 932px;
+        box-shadow: inset 0 0 15px 0 #000;
+        position: absolute;
+        top: 0;
+        pointer-events: none;
+      }
+
+      #map canvas {
+        position: relative;
+        left: -20px;
+        top: -20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="iterate">Mutate</div>
+    <div id="map"></div>
+    <a href="http://www.roguebasin.com/index.php?title=Cellular_Automata_Method_for_Generating_Random_Cave-Like_Levels">Cellular Automata</a>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.2/pixi.min.js"></script>
+  </body>
+</html>

@@ -35,6 +35,16 @@ export function hexNeighbor(hex, direction) {
   return addHexes(hex, hexDirection(direction));
 }
 
+// returns all neighbors of a given hex
+export function hexNeighbors(hex) {
+  const neighbors = [];
+  for (let i = 0; i < 6; i += 1) {
+    neighbors.push(addHexes(hex, hexDirection(i)));
+  }
+
+  return neighbors;
+}
+
 // http://www.redblobgames.com/grids/hexagons/#distances
 export function distance(hex1, hex2) {
   return (Math.abs(hex1.x - hex2.x) + Math.abs(hex1.y - hex2.y) + Math.abs(hex1.z - hex2.z)) / 2;
